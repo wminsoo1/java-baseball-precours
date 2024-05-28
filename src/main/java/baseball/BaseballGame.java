@@ -1,5 +1,10 @@
 package baseball;
 
+import baseball.player.Computer;
+import baseball.player.User;
+
+import static baseball.utils.Constant.*;
+
 public class BaseballGame {
 
     private final Computer computer;
@@ -14,12 +19,63 @@ public class BaseballGame {
         this.ball = 0;
     }
 
-    public Computer getComputer() {
-        return computer;
+    public void run() {
+        do {
+            computer.createNumber();
+            System.out.println("answer = " + computer.getNumbers());
+            gameStart();
+        } while (gameRestart());
     }
 
-    public User getUser() {
-        return user;
+    private void gameStart() {
+        do {
+            user.inputThreeNumber();
+            calculateStrikesAndBalls();
+            printStrikeAndBall();
+        } while (!isStrikeThree());
+    }
+
+    private boolean gameRestart() {
+        user.inputOneNumber();
+
+        if (user.getOneOrTwo() == 1) {
+            return true;
+        }
+        if (user.getOneOrTwo() == 2) {
+            return false;
+        }
+
+        throw new IllegalArgumentException(ERROR_MESSAGE_ONE_OR_TWO);
+    }
+
+    private void calculateStrikesAndBalls() {
+        this.strike = 0;
+        this.ball = 0;
+
+        for (int i = 0; i < LENGTH_OF_NUMBERS; i++) {
+            if (isStrike(i)) {
+                this.strike++;
+            } else {
+                if (isBall(i)) {
+                    this.ball++;
+                }
+            }
+        }
+    }
+
+    private void printStrikeAndBall() {
+        if (this.strike == 3) {
+            System.out.println("3" + STRIKE);
+            System.out.println(SUCCESS_MESSAGE);
+        } else if (this.strike == 0 && this.ball== 0) {
+            System.out.println(NOTHING);
+        } else if (this.strike == 0) {
+            System.out.println(this.ball + BALL);
+        }else if (this.ball == 0) {
+            System.out.println(this.strike + STRIKE);
+        } else {
+            System.out.println(this.ball + BALL + " " + this.strike + STRIKE);
+        }
     }
 
     private boolean isStrike(int i) {
@@ -30,43 +86,7 @@ public class BaseballGame {
         return computer.getNumbers().contains(user.getNumberIndex(i));
     }
 
-    public void calculateStrikesAndBalls() {
-        this.strike = 0;
-        this.ball = 0;
-
-        for (int i = 0; i < computer.getNumbers().size(); i++) {
-            if (isStrike(i)) {
-                this.strike += 1;
-            } else {
-                if (isBall(i)) {
-                    this.ball += 1;
-                }
-            }
-        }
-    }
-
     public boolean isStrikeThree() {
-        return strike == 3;
+        return this.strike == 3;
     }
-
-    public void printStrikeAndBall() {
-        if (this.strike == 3) {
-            System.out.println("3스트라이크");
-            System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-        } else if (this.strike == 0 && this.ball== 0) {
-            System.out.println("낫싱");
-        } else if (this.strike == 0) {
-            System.out.println(this.ball + "볼");
-        }else if (this.ball == 0) {
-            System.out.println(this.strike + "스트라이크");
-        } else {
-            System.out.println(this.ball + "볼 " + this.strike + "스트라이크");
-        }
-    }
-
-    public boolean gameRestart() {
-        return user.getOneOrTwo() == 1;
-    }
-
-
 }
