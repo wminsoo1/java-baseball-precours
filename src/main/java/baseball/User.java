@@ -6,7 +6,7 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class User implements Player{
 
-    private List<Integer> numbers = new ArrayList<>();
+    private final List<Integer> numbers = new ArrayList<>();
     private int oneOrTwo;
 
     public User() {
