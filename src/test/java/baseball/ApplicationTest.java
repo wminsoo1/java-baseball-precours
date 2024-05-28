@@ -29,6 +29,26 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 스트라이크3() {
+
+    }
+
+    @Test
+    void 볼1_스트라이크2() {
+
+    }
+
+    @Test
+    void 볼2_스트라이크1() {
+
+    }
+
+    @Test
+    void 볼3() {
+
+    }
+
     @Override
     public void runMain() {
         Application.main(new String[]{});
