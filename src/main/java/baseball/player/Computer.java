@@ -9,6 +9,9 @@ import static baseball.utils.Constant.*;
 
 public class Computer {
 
+    public final int MIN_NUM = 1;
+    public final int MAX_NUM = 9;
+
     private final List<Integer> numbers = new ArrayList<>();
 
     public Computer() {
