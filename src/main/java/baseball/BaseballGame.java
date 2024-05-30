@@ -2,6 +2,7 @@ package baseball;
 
 import baseball.player.Computer;
 import baseball.player.User;
+import baseball.utils.Output;
 
 import static baseball.utils.Constant.*;
 
@@ -9,12 +10,14 @@ public class BaseballGame {
 
     private final Computer computer;
     private final User user;
+    private final Output output;
     private int strike;
     private int ball;
 
     public BaseballGame() {
         this.computer = new Computer();
         this.user = new User();
+        this.output = new Output();
         this.strike = 0;
         this.ball = 0;
     }
@@ -40,7 +43,7 @@ public class BaseballGame {
         do {
             user.inputThreeNumber();
             calculateStrikesAndBalls();
-            printStrikeAndBall();
+            output.printStrikeAndBall(this.strike, this.ball);
         } while (!isStrikeThree());
     }
 
@@ -76,24 +79,6 @@ public class BaseballGame {
                     this.ball++;
                 }
             }
-        }
-    }
-
-    /**
-     * 스트라이크와 볼의 개수를 출력하는 메서드
-     */
-    private void printStrikeAndBall() {
-        if (this.strike == 3) {
-            System.out.println("3" + STRIKE);
-            System.out.println(SUCCESS_MESSAGE);
-        } else if (this.strike == 0 && this.ball== 0) {
-            System.out.println(NOTHING);
-        } else if (this.strike == 0) {
-            System.out.println(this.ball + BALL);
-        }else if (this.ball == 0) {
-            System.out.println(this.strike + STRIKE);
-        } else {
-            System.out.println(this.ball + BALL + " " + this.strike + STRIKE);
         }
     }
 
