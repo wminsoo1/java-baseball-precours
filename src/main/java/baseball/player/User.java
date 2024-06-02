@@ -10,8 +10,8 @@ public class User {
     private final List<Integer> numbers = new ArrayList<>();
     private int oneOrTwo;
 
-    public User() {
-        this.input = new Input();
+    public User(Input input) {
+        this.input = input;
     }
 
     /**

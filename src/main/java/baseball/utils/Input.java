@@ -9,9 +9,9 @@ public class Input {
     private final Validate validate;
     private final Output output;
 
-    public Input() {
-        this.validate = new Validate();
-        this.output = new Output();
+    public Input(Validate validate, Output output) {
+        this.validate = validate;
+        this.output = output;
     }
 
     public String[] inputThreeNumber() {

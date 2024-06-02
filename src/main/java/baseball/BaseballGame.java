@@ -14,10 +14,10 @@ public class BaseballGame {
     private int strike;
     private int ball;
 
-    public BaseballGame() {
-        this.computer = new Computer();
-        this.user = new User();
-        this.output = new Output();
+    public BaseballGame(Computer computer, User user, Output output) {
+        this.computer = computer;
+        this.user = user;
+        this.output = output;
         this.strike = 0;
         this.ball = 0;
     }
